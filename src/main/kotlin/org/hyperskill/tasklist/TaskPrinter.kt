@@ -2,7 +2,7 @@ package org.hyperskill.tasklist
 
 class TaskPrinter {
 
-    fun printTasks(tasks:MutableList<List<String>>){
+    fun printTasks(tasks:MutableList<Task>){
         if(tasks.isEmpty()){
             println("No tasks have been input")
         }
@@ -18,11 +18,13 @@ class TaskPrinter {
         }
     }
 
-    private fun printTask(number:Int, spaces:String, list:List<String>) {
-        val firstLine = list[0]
+    private fun printTask(number:Int, spaces:String, task:Task) {
+        val dateTime = task.date.toString().split("T")
+        val firstLine = "${dateTime[0]} ${dateTime[1]} ${task.priority}"
+        val taskLines = task.description
         println("$number$spaces$firstLine")
-        for(i in 1..list.size-1){
-            println("   ${list[i]}")
+        for(i in taskLines.indices){
+            println("   ${taskLines[i]}")
         }
         println()
     }
